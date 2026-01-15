@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { prisma } from "@repo/db";
+import { prisma, Role } from "@repo/db";
 import jwt from "jsonwebtoken";
 import { JWT_SECRATE } from "../config";
 
@@ -18,6 +18,17 @@ export const signupController = async (req: Request, res: Response) => {
             error: "INVALID_REQUEST"
         })
     }
+
+    const roleUpper = role.toUpperCase();
+    if (roleUpper !== Role.CREATOR && roleUpper !== Role.CONTESTEE) {
+        return res.status(400).json({
+            success: false,
+            data: null,
+            error: "INVALID_ROLE"
+        })
+    }
+    const userRole = roleUpper as Role;
+
     if (password.length < 10) {
         return res.status(400).json({
             success: false,
@@ -44,7 +55,7 @@ export const signupController = async (req: Request, res: Response) => {
                 name,
                 email,
                 password,
-                role
+                role: userRole
             }
         });
 
@@ -88,7 +99,7 @@ export const signinController = async (req: Request, res: Response) => {
         });
 
         if (!isPresent) {
-            return res.status(400).json({
+            return res.status(401).json({
                 success: false,
                 data: null,
                 error: "INVALID_CREDENTIALS"

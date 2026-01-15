@@ -43,7 +43,7 @@ export const addMcqQuestionController = async(req: Request, res: Response) => {
             }
         });
 
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             data: {
                 id: question.id,

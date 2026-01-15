@@ -1,3 +1,9 @@
+import dotenv from "dotenv";
+
+dotenv.config(); 
+
+console.log("db", process.env.DATABASE_URL! )
+
 import express from "express";
 import type { Express } from "express";
 import bodyParser from "body-parser";
@@ -13,6 +19,6 @@ app.get("/", (req, res) => {
   res.send("Hello Contest");
 });
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
 });

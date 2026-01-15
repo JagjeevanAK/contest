@@ -16,6 +16,25 @@ export const newContestController = async (req: Request, res: Response) => {
             error: "INVALID_REQUEST"
         });
     }
+
+    const parsedStartTime = new Date(startTime);
+    const parsedEndTime = new Date(endTime);
+
+    if (isNaN(parsedStartTime.getTime()) || isNaN(parsedEndTime.getTime())) {
+        return res.status(400).json({
+            success: false,
+            data: null,
+            error: "INVALID_DATE_FORMAT"
+        });
+    }
+
+    if (parsedStartTime >= parsedEndTime) {
+        return res.status(400).json({
+            success: false,
+            data: null,
+            error: "INVALID_DATE_RANGE"
+        });
+    }
     
     const { email } = req.user!;
 
@@ -30,8 +49,8 @@ export const newContestController = async (req: Request, res: Response) => {
             data: {
                 title,
                 description,
-                startTime,
-                endTime,
+                startTime: parsedStartTime,
+                endTime: parsedEndTime,
                 user: {
                     connect: {
                         id: userData!.id
