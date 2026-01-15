@@ -1,0 +1,1 @@
+export const JWT_SECRATE = process.env.JWT_SECRATE || "supertoken";
