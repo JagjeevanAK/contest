@@ -1,12 +1,10 @@
-version: "3"
-
 volumes:
   database:
     driver: local
 
 services:
   db:
-    platform: linux/amd64
+    # platform: linux/amd64
     image: postgres:15 # Use a specific version of Postgres
     restart: always
     environment:

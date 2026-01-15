@@ -2,14 +2,6 @@ import { prisma } from "@repo/db";
 import type { Request, Response } from "express"
 
 export const newContestController = async (req: Request, res: Response) => {
-    if (!req.user) {
-        return res.status(401).json({
-            success: false,
-            data: null,
-            error: "UNAUTHORIZED"
-        });
-    }
-
     const { 
         title,
         description,
@@ -25,7 +17,7 @@ export const newContestController = async (req: Request, res: Response) => {
         });
     }
     
-    const { email } = req.user;
+    const { email } = req.user!;
 
     try {
         const userData = await prisma.user.findFirst({

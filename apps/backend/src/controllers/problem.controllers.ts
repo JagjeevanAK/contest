@@ -44,6 +44,7 @@ export const DSAQuestionsController = async (req: Request, res: Response) => {
 export const submitCodeDSAController = async (req: Request, res: Response) => {
     const { problemId } = req.params;
     const { code, language } = req.body;
+    const { id } = req.user!;
 
     if (!problemId || !code || !language) {
         return res.status(400).json({
@@ -86,10 +87,24 @@ export const submitCodeDSAController = async (req: Request, res: Response) => {
             });
         }
         
+        const submmitedQuestion = await prisma.dsaSubmission.create({
+          data: {
+            userId: id,
+            code,
+            language,
+            status: "running"
+          },
+        });
+
         return res.status(200).json({
-            success: true,
-            data: problem,
-            error: null
+          success: true,
+          data: {
+            status: submmitedQuestion.status,
+            pointsEarned: submmitedQuestion.pointsEarned,
+            testCasesPassed: submmitedQuestion.totalCasesPassed,
+            totalTestCases: submmitedQuestion.totalTestCases,
+          },
+          error: null,
         });
     } catch (error) {
         return res.status(500).json({

@@ -18,13 +18,13 @@ export const signupController = async (req: Request, res: Response) => {
             error: "INVALID_REQUEST"
         })
     }
-    // if (password.length < 10) {
-    //     return res.status(400).json({
-    //         success: false,
-    //         data: null,
-    //         error: "PASSWORD_LENGTH"
-    //     })
-    // }
+    if (password.length < 10) {
+        return res.status(400).json({
+            success: false,
+            data: null,
+            error: "PASSWORD_LENGTH"
+        })
+    }
 
     const isPresent = await prisma.user.findFirst({
         where: { email }
