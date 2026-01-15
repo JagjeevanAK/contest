@@ -22,17 +22,17 @@ export const newContestController = async (req: Request, res: Response) => {
 
     if (isNaN(parsedStartTime.getTime()) || isNaN(parsedEndTime.getTime())) {
         return res.status(400).json({
-            success: false,
-            data: null,
-            error: "INVALID_DATE_FORMAT"
+          success: false,
+          data: null,
+          error: "INVALID_REQUEST",
         });
     }
 
     if (parsedStartTime >= parsedEndTime) {
         return res.status(400).json({
-            success: false,
-            data: null,
-            error: "INVALID_DATE_RANGE"
+          success: false,
+          data: null,
+          error: "INVALID_REQUEST",
         });
     }
     
@@ -65,7 +65,7 @@ export const newContestController = async (req: Request, res: Response) => {
                 id: contestData.id,
                 title: contestData.title,
                 description: contestData.description,
-                creatorID: contestData.creatorID,
+                creatorId: contestData.creatorID,
                 startTime: contestData.startTime,
                 endTime: contestData.endTime,
             },
@@ -96,6 +96,10 @@ export const getContestController = async (req: Request, res: Response) => {
         const contestData = await prisma.contest.findFirst({
             where: {
                 id: contestId
+            },
+            include: {
+                mcqs: true,
+                dsaProblems: true
             }
         });
 
@@ -115,26 +119,22 @@ export const getContestController = async (req: Request, res: Response) => {
                 description: contestData.description,
                 startTime: contestData.startTime,
                 endTime: contestData.endTime,
-                creatorId: contestData.creatorId,
-                mcqs: [
-                    {
-                        id: contestData.mcqs.id,
-                        questionText: contestData.mcqs.questionText,
-                        options: contestData.mcqs.options,
-                        points: contestData.mcqs.points
-                    }
-                ],
-                dsaProblems:[
-                    {
-                        id: contestData.dsaProblems.id,
-                        title: contestData.dsaProblems.title,
-                        description: contestData.dsaProblems.description,
-                        tags: contestData.dsaProblems.tags,
-                        points: contestData.dsaProblems.points,
-                        timeLimit: contestData.dsaProblems.timeLimit,
-                        memoryLimit: contestData.dsaProblems.memoryLimit
-                    }
-                ]
+                creatorId: contestData.creatorID,
+                mcqs: contestData.mcqs.map(mcq => ({
+                    id: mcq.id,
+                    questionText: mcq.questionText,
+                    options: mcq.options,
+                    points: mcq.points
+                })),
+                dsaProblems: contestData.dsaProblems.map(problem => ({
+                    id: problem.id,
+                    title: problem.title,
+                    description: problem.description,
+                    tags: problem.tags,
+                    points: problem.points,
+                    timeLimit: problem.timeLimit,
+                    memoryLimit: problem.memoryLimit
+                }))
             },
             error: null
         });

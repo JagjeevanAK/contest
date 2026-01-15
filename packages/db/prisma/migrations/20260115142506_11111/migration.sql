@@ -1,28 +1,18 @@
-/*
-  Warnings:
-
-  - You are about to drop the column `emailVerified` on the `User` table. All the data in the column will be lost.
-  - Added the required column `password` to the `User` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `role` to the `User` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `updatedAt` to the `User` table without a default value. This is not possible if the table is not empty.
-  - Made the column `name` on table `User` required. This step will fail if there are existing NULL values in that column.
-  - Made the column `email` on table `User` required. This step will fail if there are existing NULL values in that column.
-
-*/
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('CREATOR', 'CONTESTEE');
 
--- DropIndex
-DROP INDEX "User_email_key";
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" "Role" NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
--- AlterTable
-ALTER TABLE "User" DROP COLUMN "emailVerified",
-ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN     "password" TEXT NOT NULL,
-ADD COLUMN     "role" "Role" NOT NULL,
-ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL,
-ALTER COLUMN "name" SET NOT NULL,
-ALTER COLUMN "email" SET NOT NULL;
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Contest" (

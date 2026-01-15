@@ -8,10 +8,10 @@ export const signupController = async (req: Request, res: Response) => {
         name, 
         email, 
         password, 
-        role 
+        role = "contestee"
     } = req.body;
 
-    if (!name || !email || !password || !role) {
+    if (!name || !email || !password) {
         return res.status(400).json({
             success: false,
             data: null,
@@ -24,7 +24,7 @@ export const signupController = async (req: Request, res: Response) => {
         return res.status(400).json({
             success: false,
             data: null,
-            error: "INVALID_ROLE"
+            error: "INVALID_REQUEST"
         })
     }
     const userRole = roleUpper as Role;
@@ -65,7 +65,7 @@ export const signupController = async (req: Request, res: Response) => {
                 id: data.id,
                 name: data.name,
                 email: data.email,
-                role: data.role
+                role: data.role.toLowerCase()
             },
             error: null
         });

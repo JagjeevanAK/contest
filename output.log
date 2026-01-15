@@ -1,0 +1,944 @@
+test git:(main) ✗ npm test
+
+> contest@1.0.0 test
+> vitest run
+
+
+ RUN  v4.0.17 /Users/jagjeevankashid/Developer/contest/test
+
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should register a creator successfully 204ms
+   → expected { …(4) } to have property "role" with value 'creator'
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should register a contestee successfully 16ms
+   → expected { …(4) } to have property "role" with value 'contestee'
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should register a second contestee for leaderboard tests 11ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should default role to contestee if not provided 3ms
+   → expected 400 to be 201 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return EMAIL_ALREADY_EXISTS for duplicate email 6ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for missing email 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for missing password 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for missing name 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for invalid email format 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for invalid role 2ms
+   → expected { success: false, data: null, …(1) } to have property "error" with value 'INVALID_REQUEST'
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for empty body 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should login creator successfully and return JWT token 10ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should login contestee successfully and return JWT token 9ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should login second contestee successfully 6ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_CREDENTIALS for wrong password 5ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_CREDENTIALS for non-existent email 4ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_REQUEST for missing email 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_REQUEST for missing password 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_REQUEST for empty body 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_REQUEST for invalid email format 4ms
+   → expected 401 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should create a contest successfully as creator 27ms
+   → expected { …(6) } to have property "creatorId" with value null
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return UNAUTHORIZED without token 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return UNAUTHORIZED with invalid token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return FORBIDDEN when contestee tries to create contest 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for missing title 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for missing description 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for missing startTime 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for missing endTime 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for invalid date format 2ms
+   → expected { success: false, data: null, …(1) } to have property "error" with value 'INVALID_REQUEST'
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for empty body 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId > should get contest details successfully 4ms
+   → expected 404 to be 200 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId > should return UNAUTHORIZED without token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId > should return UNAUTHORIZED with invalid token 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId > should return CONTEST_NOT_FOUND for non-existent contest 3ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId > should return CONTEST_NOT_FOUND for invalid contest ID 2ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should add MCQ question successfully as creator 4ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should add second MCQ for leaderboard tests 4ms
+   → expected 404 to be 201 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return UNAUTHORIZED without token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return FORBIDDEN when contestee tries to add MCQ 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return CONTEST_NOT_FOUND for non-existent contest 2ms
+   → expected 400 to be 404 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for missing questionText 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for missing options 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for missing correctOptionIndex 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for non-array options 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for invalid correctOptionIndex (out of bounds) 3ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for negative correctOptionIndex 3ms
+   → expected 404 to be 400 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for empty options array 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should add DSA problem with test cases successfully 3ms
+   → expected 404 to be 201 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return UNAUTHORIZED without token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return FORBIDDEN when contestee tries to add DSA problem 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return CONTEST_NOT_FOUND for non-existent contest 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for missing title 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for missing description 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for missing testCases 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for empty testCases array 3ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for test case missing input 2ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for test case missing expectedOutput 2ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for non-array tags 2ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/problems/:problemId > should get DSA problem details with visible test cases only 4ms
+   → expected 404 to be 200 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/problems/:problemId > should return UNAUTHORIZED without token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/problems/:problemId > should return UNAUTHORIZED with invalid token 0ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/problems/:problemId > should return PROBLEM_NOT_FOUND for non-existent problem 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/problems/:problemId > should return PROBLEM_NOT_FOUND for invalid problem ID 2ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId (with questions) > should include MCQs without correctOptionIndex for contestees 2ms
+   → expected 404 to be 200 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId (with questions) > should include DSA problems 3ms
+   → expected 404 to be 200 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should submit correct MCQ answer successfully as contestee 5ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should submit incorrect MCQ answer and return 0 points 1ms
+   → expected 400 to be 201 // Object.is equality
+stderr | tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for MCQ submission to expired contest
+Skipping test - expired contest setup failed
+
+stderr | tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for MCQ submission to future contest
+Skipping test - future contest setup failed
+
+stderr | tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for DSA submission to expired contest
+Skipping test - expired contest setup failed
+
+stderr | tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for DSA submission to future contest
+Skipping test - future contest setup failed
+
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return ALREADY_SUBMITTED for duplicate submission 3ms
+   → expected 404 to be 400 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return UNAUTHORIZED without token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return FORBIDDEN when creator tries to submit to own contest 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return QUESTION_NOT_FOUND for non-existent question 3ms
+   → expected { success: false, data: null, …(1) } to have property "error" with value 'QUESTION_NOT_FOUND'
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return INVALID_REQUEST for missing selectedOptionIndex 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return INVALID_REQUEST for negative selectedOptionIndex 2ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return INVALID_REQUEST for non-integer selectedOptionIndex 2ms
+   → expected 404 to be 400 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should submit DSA solution successfully 6ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should allow multiple submissions for DSA problems 3ms
+   → expected 404 to be 201 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should return UNAUTHORIZED without token 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should return FORBIDDEN when creator tries to submit to own contest problem 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should return PROBLEM_NOT_FOUND for non-existent problem 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should return INVALID_REQUEST for missing code 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should return INVALID_REQUEST for missing language 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should return INVALID_REQUEST for empty code 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return leaderboard with correct rankings 4ms
+   → Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return UNAUTHORIZED without token 3ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return UNAUTHORIZED with invalid token 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return CONTEST_NOT_FOUND for non-existent contest 1ms
+   → Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return CONTEST_NOT_FOUND for invalid contest ID 1ms
+   → Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for MCQ submission to expired contest 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for MCQ submission to future contest 0ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for DSA submission to expired contest 0ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Contest Time Window Restrictions > should return CONTEST_NOT_ACTIVE for DSA submission to future contest 0ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > Points Calculation > should calculate DSA points correctly: floor((passed / total) * points) 2ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return ACCEPTED status for correct solution 2ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return WRONG_ANSWER status for incorrect solution 2ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return TIME_LIMIT_EXCEEDED status for slow solution 1ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return RUNTIME_ERROR status for code with errors 2ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return RUNTIME_ERROR for syntax errors 3ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return RUNTIME_ERROR for null pointer errors 2ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should handle partial pass with correct points calculation 1ms
+   → expected 404 to be 201 // Object.is equality
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > success response should have exactly success, data, error keys 2ms
+   → expected 404 to be 200 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > error response should have exactly success, data, error keys 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > error should be a string, not an object 2ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > success response should have error as null 2ms
+   → expected 404 to be 200 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > error response should have data as null 1ms
+stderr | tests/contest-platform.test.js > Contest Platform Backend Tests > Authorization Edge Cases > creator should be able to submit to another creator's contest
+Skipping test - could not create MCQ
+
+stderr | tests/contest-platform.test.js > Contest Platform Backend Tests > Resource Ownership Validation > should return QUESTION_NOT_FOUND when MCQ belongs to different contest
+Skipping test - setup failed
+
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Authorization Edge Cases > creator should be able to submit to another creator's contest 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Malformed Request Handling > should handle null body gracefully 1ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Malformed Request Handling > should handle Authorization header without Bearer prefix 2ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Malformed Request Handling > should handle empty Authorization header 0ms
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Malformed Request Handling > should handle expired/tampered JWT token 1ms
+ × tests/contest-platform.test.js > Contest Platform Backend Tests > Timestamp Format (ISO 8601) > contest timestamps should be in ISO 8601 format 2ms
+   → expected 404 to be 200 // Object.is equality
+ ✓ tests/contest-platform.test.js > Contest Platform Backend Tests > Resource Ownership Validation > should return QUESTION_NOT_FOUND when MCQ belongs to different contest 0ms
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ Failed Tests 43 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should register a creator successfully
+AssertionError: expected { …(4) } to have property "role" with value 'creator'
+
+Expected: "creator"
+Received: "CREATOR"
+
+ ❯ tests/contest-platform.test.js:90:29
+     88|       expect(res.body.data).toHaveProperty('name', 'Test Creator');
+     89|       expect(res.body.data).toHaveProperty('email', `creator${testRunId}@test.com`);
+     90|       expect(res.body.data).toHaveProperty('role', 'creator');
+       |                             ^
+     91|       expect(res.body.data).not.toHaveProperty('password');
+     92|       
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should register a contestee successfully
+AssertionError: expected { …(4) } to have property "role" with value 'contestee'
+
+Expected: "contestee"
+Received: "CONTESTEE"
+
+ ❯ tests/contest-platform.test.js:107:29
+    105|       validateSuccessResponse(res.body);
+    106|       expect(res.body.data).toHaveProperty('id');
+    107|       expect(res.body.data).toHaveProperty('role', 'contestee');
+       |                             ^
+    108|       
+    109|       contesteeId = res.body.data.id;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should default role to contestee if not provided
+AssertionError: expected 400 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 400
+
+ ❯ tests/contest-platform.test.js:132:26
+    130|       });
+    131|       
+    132|       expect(res.status).toBe(201);
+       |                          ^
+    133|       validateSuccessResponse(res.body);
+    134|       expect(res.body.data).toHaveProperty('role', 'contestee');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/signup > should return INVALID_REQUEST for invalid role
+AssertionError: expected { success: false, data: null, …(1) } to have property "error" with value 'INVALID_REQUEST'
+
+Expected: "INVALID_REQUEST"
+Received: "INVALID_ROLE"
+
+ ❯ validateErrorResponse tests/contest-platform.test.js:66:18
+     64|     expect(body).toHaveProperty('success', false);
+     65|     expect(body).toHaveProperty('data', null);
+     66|     expect(body).toHaveProperty('error', expectedError);
+       |                  ^
+     67|     expect(typeof body.error).toBe('string');
+     68|     expect(Object.keys(body).sort()).toEqual(['data', 'error', 'success']);
+ ❯ tests/contest-platform.test.js:199:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/auth/login > should return INVALID_REQUEST for invalid email format
+AssertionError: expected 401 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 401
+
+ ❯ tests/contest-platform.test.js:307:26
+    305|       });
+    306|       
+    307|       expect(res.status).toBe(400);
+       |                          ^
+    308|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    309|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should create a contest successfully as creator
+AssertionError: expected { …(6) } to have property "creatorId" with value null
+
+- Expected: 
+null
+
++ Received: 
+undefined
+
+ ❯ tests/contest-platform.test.js:338:29
+    336|       expect(res.body.data).toHaveProperty('title', 'Test Contest');
+    337|       expect(res.body.data).toHaveProperty('description', 'Test Description');
+    338|       expect(res.body.data).toHaveProperty('creatorId', creatorId);
+       |                             ^
+    339|       expect(res.body.data).toHaveProperty('startTime');
+    340|       expect(res.body.data).toHaveProperty('endTime');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests > should return INVALID_REQUEST for invalid date format
+AssertionError: expected { success: false, data: null, …(1) } to have property "error" with value 'INVALID_REQUEST'
+
+Expected: "INVALID_REQUEST"
+Received: "INVALID_DATE_FORMAT"
+
+ ❯ validateErrorResponse tests/contest-platform.test.js:66:18
+     64|     expect(body).toHaveProperty('success', false);
+     65|     expect(body).toHaveProperty('data', null);
+     66|     expect(body).toHaveProperty('error', expectedError);
+       |                  ^
+     67|     expect(typeof body.error).toBe('string');
+     68|     expect(Object.keys(body).sort()).toEqual(['data', 'error', 'success']);
+ ❯ tests/contest-platform.test.js:434:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId > should get contest details successfully
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:454:26
+    452|       const res = await request('GET', `/api/contests/${contestId}`, null, contesteeToken);
+    453|       
+    454|       expect(res.status).toBe(200);
+       |                          ^
+    455|       validateSuccessResponse(res.body);
+    456|       expect(res.body.data).toHaveProperty('id', contestId);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should add MCQ question successfully as creator
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:511:26
+    509|       }, creatorToken);
+    510|       
+    511|       expect(res.status).toBe(201);
+       |                          ^
+    512|       validateSuccessResponse(res.body);
+    513|       expect(res.body.data).toHaveProperty('id');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should add second MCQ for leaderboard tests
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:527:26
+    525|       }, creatorToken);
+    526|       
+    527|       expect(res.status).toBe(201);
+       |                          ^
+    528|       validateSuccessResponse(res.body);
+    529|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return CONTEST_NOT_FOUND for non-existent contest
+AssertionError: expected 400 to be 404 // Object.is equality
+
+- Expected
++ Received
+
+- 404
++ 400
+
+ ❯ tests/contest-platform.test.js:563:26
+    561|       }, creatorToken);
+    562|       
+    563|       expect(res.status).toBe(404);
+       |                          ^
+    564|       validateErrorResponse(res.body, 'CONTEST_NOT_FOUND');
+    565|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for invalid correctOptionIndex (out of bounds)
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:620:26
+    618|       }, creatorToken);
+    619|       
+    620|       expect(res.status).toBe(400);
+       |                          ^
+    621|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    622|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq > should return INVALID_REQUEST for negative correctOptionIndex
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:632:26
+    630|       }, creatorToken);
+    631|       
+    632|       expect(res.status).toBe(400);
+       |                          ^
+    633|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    634|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should add DSA problem with test cases successfully
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:677:26
+    675|       }, creatorToken);
+    676|       
+    677|       expect(res.status).toBe(201);
+       |                          ^
+    678|       validateSuccessResponse(res.body);
+    679|       expect(res.body.data).toHaveProperty('id');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for empty testCases array
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:793:26
+    791|       }, creatorToken);
+    792|       
+    793|       expect(res.status).toBe(400);
+       |                          ^
+    794|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    795|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for test case missing input
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:808:26
+    806|       }, creatorToken);
+    807|       
+    808|       expect(res.status).toBe(400);
+       |                          ^
+    809|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    810|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for test case missing expectedOutput
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:823:26
+    821|       }, creatorToken);
+    822|       
+    823|       expect(res.status).toBe(400);
+       |                          ^
+    824|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    825|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/dsa > should return INVALID_REQUEST for non-array tags
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:840:26
+    838|       }, creatorToken);
+    839|       
+    840|       expect(res.status).toBe(400);
+       |                          ^
+    841|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    842|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/problems/:problemId > should get DSA problem details with visible test cases only
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:854:26
+    852|       const res = await request('GET', `/api/problems/${dsaProblemId}`, null, contesteeToken);
+    853|       
+    854|       expect(res.status).toBe(200);
+       |                          ^
+    855|       validateSuccessResponse(res.body);
+    856|       expect(res.body.data).toHaveProperty('id', dsaProblemId);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId (with questions) > should include MCQs without correctOptionIndex for contestees
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:917:26
+    915|       const res = await request('GET', `/api/contests/${contestId}`, null, contesteeToken);
+    916|       
+    917|       expect(res.status).toBe(200);
+       |                          ^
+    918|       validateSuccessResponse(res.body);
+    919|       expect(res.body.data.mcqs.length).toBeGreaterThan(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId (with questions) > should include DSA problems
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:934:26
+    932|       const res = await request('GET', `/api/contests/${contestId}`, null, contesteeToken);
+    933|       
+    934|       expect(res.status).toBe(200);
+       |                          ^
+    935|       validateSuccessResponse(res.body);
+    936|       expect(res.body.data.dsaProblems.length).toBeGreaterThan(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should submit correct MCQ answer successfully as contestee
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:961:26
+    959|       }, contesteeToken);
+    960|       
+    961|       expect(res.status).toBe(201);
+       |                          ^
+    962|       validateSuccessResponse(res.body);
+    963|       expect(res.body.data).toHaveProperty('isCorrect', true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should submit incorrect MCQ answer and return 0 points
+AssertionError: expected 400 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 400
+
+ ❯ tests/contest-platform.test.js:972:26
+    970|       }, contestee2Token);
+    971|       
+    972|       expect(res.status).toBe(201);
+       |                          ^
+    973|       validateSuccessResponse(res.body);
+    974|       expect(res.body.data).toHaveProperty('isCorrect', false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return ALREADY_SUBMITTED for duplicate submission
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:983:26
+    981|       }, contesteeToken);
+    982|       
+    983|       expect(res.status).toBe(400);
+       |                          ^
+    984|       validateErrorResponse(res.body, 'ALREADY_SUBMITTED');
+    985|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return QUESTION_NOT_FOUND for non-existent question
+AssertionError: expected { success: false, data: null, …(1) } to have property "error" with value 'QUESTION_NOT_FOUND'
+
+Expected: "QUESTION_NOT_FOUND"
+Received: "CONTEST_NOT_FOUND"
+
+ ❯ validateErrorResponse tests/contest-platform.test.js:66:18
+     64|     expect(body).toHaveProperty('success', false);
+     65|     expect(body).toHaveProperty('data', null);
+     66|     expect(body).toHaveProperty('error', expectedError);
+       |                  ^
+     67|     expect(typeof body.error).toBe('string');
+     68|     expect(Object.keys(body).sort()).toEqual(['data', 'error', 'success']);
+ ❯ tests/contest-platform.test.js:1011:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return INVALID_REQUEST for negative selectedOptionIndex
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:1026:26
+    1024|       }, contesteeToken);
+    1025|       
+    1026|       expect(res.status).toBe(400);
+       |                          ^
+    1027|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    1028|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/contests/:contestId/mcq/:questionId/submit > should return INVALID_REQUEST for non-integer selectedOptionIndex
+AssertionError: expected 404 to be 400 // Object.is equality
+
+- Expected
++ Received
+
+- 400
++ 404
+
+ ❯ tests/contest-platform.test.js:1035:26
+    1033|       }, contesteeToken);
+    1034|       
+    1035|       expect(res.status).toBe(400);
+       |                          ^
+    1036|       validateErrorResponse(res.body, 'INVALID_REQUEST');
+    1037|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should submit DSA solution successfully
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1052:26
+    1050|       }, contesteeToken);
+    1051|       
+    1052|       expect(res.status).toBe(201);
+       |                          ^
+    1053|       validateSuccessResponse(res.body);
+    1054|       expect(res.body.data).toHaveProperty('status');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > POST /api/problems/:problemId/submit > should allow multiple submissions for DSA problems
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1076:26
+    1074|       }, contesteeToken);
+    1075|       
+    1076|       expect(res.status).toBe(201);
+       |                          ^
+    1077|       validateSuccessResponse(res.body);
+    1078|       expect(res.body.data).toHaveProperty('status');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[29/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return leaderboard with correct rankings
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return CONTEST_NOT_FOUND for non-existent contest
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > GET /api/contests/:contestId/leaderboard > should return CONTEST_NOT_FOUND for invalid contest ID
+SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[30/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > Points Calculation > should calculate DSA points correctly: floor((passed / total) * points)
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1382:26
+    1380|       }, contestee2Token);
+    1381|       
+    1382|       expect(res.status).toBe(201);
+       |                          ^
+    1383|       validateSuccessResponse(res.body);
+    1384|       
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[31/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return ACCEPTED status for correct solution
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1418:26
+    1416|       }, contesteeToken);
+    1417|       
+    1418|       expect(res.status).toBe(201);
+       |                          ^
+    1419|       validateSuccessResponse(res.body);
+    1420|       expect(res.body.data).toHaveProperty('status', 'accepted');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[32/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return WRONG_ANSWER status for incorrect solution
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1436:26
+    1434|       }, contesteeToken);
+    1435|       
+    1436|       expect(res.status).toBe(201);
+       |                          ^
+    1437|       validateSuccessResponse(res.body);
+    1438|       expect(res.body.data).toHaveProperty('status', 'wrong_answer');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[33/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return TIME_LIMIT_EXCEEDED status for slow solution
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1466:26
+    1464|       }, contesteeToken);
+    1465|       
+    1466|       expect(res.status).toBe(201);
+       |                          ^
+    1467|       validateSuccessResponse(res.body);
+    1468|       expect(res.body.data).toHaveProperty('status', 'time_limit_exceeded');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[34/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return RUNTIME_ERROR status for code with errors
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1483:26
+    1481|       }, contesteeToken);
+    1482|       
+    1483|       expect(res.status).toBe(201);
+       |                          ^
+    1484|       validateSuccessResponse(res.body);
+    1485|       expect(res.body.data).toHaveProperty('status', 'runtime_error');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[35/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return RUNTIME_ERROR for syntax errors
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1500:26
+    1498|       }, contesteeToken);
+    1499|       
+    1500|       expect(res.status).toBe(201);
+       |                          ^
+    1501|       validateSuccessResponse(res.body);
+    1502|       expect(res.body.data).toHaveProperty('status', 'runtime_error');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[36/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should return RUNTIME_ERROR for null pointer errors
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1517:26
+    1515|       }, contesteeToken);
+    1516|       
+    1517|       expect(res.status).toBe(201);
+       |                          ^
+    1518|       validateSuccessResponse(res.body);
+    1519|       expect(res.body.data).toHaveProperty('status', 'runtime_error');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[37/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > DSA Submission Status Tests > should handle partial pass with correct points calculation
+AssertionError: expected 404 to be 201 // Object.is equality
+
+- Expected
++ Received
+
+- 201
++ 404
+
+ ❯ tests/contest-platform.test.js:1542:26
+    1540|       }, contesteeToken);
+    1541|       
+    1542|       expect(res.status).toBe(201);
+       |                          ^
+    1543|       validateSuccessResponse(res.body);
+    1544|       expect(['accepted', 'wrong_answer']).toContain(res.body.data.status);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[38/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > success response should have exactly success, data, error keys
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:1562:26
+    1560|       const res = await request('GET', `/api/contests/${contestId}`, null, contesteeToken);
+    1561|       
+    1562|       expect(res.status).toBe(200);
+       |                          ^
+    1563|       const keys = Object.keys(res.body).sort();
+    1564|       expect(keys).toEqual(['data', 'error', 'success']);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[39/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > Response Format Strictness > success response should have error as null
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:1587:26
+    1585|       const res = await request('GET', `/api/contests/${contestId}`, null, contesteeToken);
+    1586|       
+    1587|       expect(res.status).toBe(200);
+       |                          ^
+    1588|       expect(res.body.error).toBeNull();
+    1589|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[40/43]⎯
+
+ FAIL  tests/contest-platform.test.js > Contest Platform Backend Tests > Timestamp Format (ISO 8601) > contest timestamps should be in ISO 8601 format
+AssertionError: expected 404 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 404
+
+ ❯ tests/contest-platform.test.js:1725:26
+    1723|       const res = await request('GET', `/api/contests/${contestId}`, null, contesteeToken);
+    1724|       
+    1725|       expect(res.status).toBe(200);
+       |                          ^
+    1726|       
+    1727|       const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[41/43]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  43 failed | 68 passed (111)
+   Start at  22:12:58
+   Duration  721ms (transform 42ms, setup 0ms, import 58ms, tests 541ms, environment 0ms)
+
+➜  test git:(main) ✗ 
